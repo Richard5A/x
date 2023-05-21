@@ -31,8 +31,7 @@ def listen_for_response():
             reply(data.decode())
 
 
-thread_response = threading.Thread(target=listen_for_response, name="Response Thread")
-
+print("Creating Send socket")
 send_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 send_socket.connect((HOST, PORT_S))
 send_socket.sendall(b"First send succeed!")
@@ -40,5 +39,7 @@ send_socket.sendall(b"First send succeed!")
 listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 listen_socket.bind((ME, PORT))
+
+thread_response = threading.Thread(target=listen_for_response, name="Response Thread")
 
 thread_response.start()
