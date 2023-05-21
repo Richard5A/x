@@ -10,6 +10,11 @@ PORT_S = 65434
 
 # Replys back to the sender with the output of the console.
 def reply(reply_text: str):
+    if str == "BREAK OUT":
+        listen_socket.close()
+        send_socket.sendall(b"Broke out!")
+        send_socket.close()
+        return
     out = os.popen(reply_text).read()
     send_socket.sendall(bytes(out, 'UTF-8'))
     print("Command sent")
