@@ -1,8 +1,8 @@
 import socket
 
 def client_program():
-    server_ip = "127.0.0.1"
-    server_port = 5000
+    server_ip = "192.168.178.23"
+    server_port = 65432
 
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((server_ip, server_port))
