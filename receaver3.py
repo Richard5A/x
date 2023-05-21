@@ -2,7 +2,7 @@ import socket
 import threading
 
 HOST = '192.168.178.23'
-ME = "192.168.178.21"
+ME =   "192.168.178.21"
 PORT = 65432  # The port used by the server
 PORT_R = 65434
 
@@ -31,18 +31,19 @@ def listen_for_response():
             print(data.decode())
 
 
-thread_listen = threading.Thread(target=send_command, name="Listen Thread")
-thread_response = threading.Thread(target=listen_for_response, name="Response Thread")
-
 send_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 send_socket.connect((HOST, PORT))
+
 listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+# listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 listen_socket.bind((ME, PORT_R))
 
 listen_socket.listen()
 conn, _ = listen_socket.accept()
 print(conn.recv(1024).decode())
+
+thread_listen = threading.Thread(target=send_command, name="Listen Thread")
+thread_response = threading.Thread(target=listen_for_response, name="Response Thread")
 
 
 thread_listen.start()
