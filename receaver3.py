@@ -10,7 +10,7 @@ PORT_R = 65434
 def send_command():
     print("Starting send_command...")
     while True:
-        inp = input("Input command >")
+        inp = input("Input command repyl>")
         print("Connecting...")
         send_socket.sendall(bytes(inp, 'UTF-8'))
         print("Command sent")

